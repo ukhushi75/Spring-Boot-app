@@ -30,6 +30,32 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
 
+
+      # lets add the code we copied from github doc
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: ukhushi75/my-spring-boot-app
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
    # - name: Update dependency graph
     #  uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+
+  # GitHub has some already made actions we can use to create and push the docker image to the dockerhub
+  # so we can comment the below code out
+  #  - name: login to dockerhub
+  #    run: cmd
+  #  - name: build a docker image
+  #    run: cmd
+  #  - name: push that image to dockerhub
+  #    run: cmd
+#1. login to your dockerhub
+#2. build a docker image
+#3. push that image to dockerhub
+
+
